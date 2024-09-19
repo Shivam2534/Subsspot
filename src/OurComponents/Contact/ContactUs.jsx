@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { Link } from 'react-router-dom'
 
 export default function ContactUs() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -32,15 +33,15 @@ export default function ContactUs() {
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-[#282828]">
-        <a href="/" className="flex items-center space-x-2">
+        <Link to={"/"} className="flex items-center space-x-2">
           <Youtube className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
           <span className="text-lg sm:text-xl font-bold">Subspot</span>
-        </a>
+        </Link>
         <nav className="hidden md:flex space-x-4">
-          <a href="/" className="hover:text-gray-300">Home</a>
-          <a href="/features" className="hover:text-gray-300">Features</a>
-          <a href="/pricing" className="hover:text-gray-300">Pricing</a>
-          <a href="/faq" className="hover:text-gray-300">FAQ</a>
+          <Link to={"/"} className="hover:text-gray-300">Home</Link>
+          <Link to={"/features"} className="hover:text-gray-300">Features</Link>
+          <Link to={"/pricing"} className="hover:text-gray-300">Pricing</Link>
+          <Link to={"/faq"} className="hover:text-gray-300">FAQ</Link>
         </nav>
         <div className="md:hidden">
           <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -53,10 +54,10 @@ export default function ContactUs() {
       {isMenuOpen && (
         <div className="md:hidden bg-[#282828] p-4">
           <nav className="flex flex-col space-y-2">
-            <a href="/" className="hover:text-gray-300">Home</a>
-            <a href="/features" className="hover:text-gray-300">Features</a>
-            <a href="/pricing" className="hover:text-gray-300">Pricing</a>
-            <a href="/faq" className="hover:text-gray-300">FAQ</a>
+            <Link to={"/"} className="hover:text-gray-300">Home</Link>
+            <Link to={"/features"} className="hover:text-gray-300">Features</Link>
+            <Link to={"/pricing"} className="hover:text-gray-300">Pricing</Link>
+            <Link to={"/faq"} className="hover:text-gray-300">FAQ</Link>
             <Button className="bg-red-600 hover:bg-red-700 w-full">Sign Up</Button>
           </nav>
         </div>
@@ -154,8 +155,8 @@ export default function ContactUs() {
           &copy; 2023 Subspot. All rights reserved.
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <a href="#" className="text-xs hover:underline underline-offset-4">Terms of Service</a>
-          <a href="#" className="text-xs hover:underline underline-offset-4">Privacy</a>
+          <Link to={"#"} className="text-xs hover:underline underline-offset-4">Terms of Service</Link>
+          <Link to={"#"} className="text-xs hover:underline underline-offset-4">Privacy</Link>
         </nav>
       </footer>
     </div>

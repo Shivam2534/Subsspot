@@ -1,5 +1,19 @@
-import React, { useState } from 'react';
-import { Youtube, Play, Music, Download, Shield, DollarSign, Users, Clock, Menu, CheckCircle2, Zap, Headphones } from "lucide-react";
+import React, { useState } from "react";
+import {
+  Youtube,
+  Play,
+  Music,
+  Download,
+  Shield,
+  DollarSign,
+  Users,
+  Clock,
+  Menu,
+  CheckCircle2,
+  Zap,
+  Headphones,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Button = ({ children, className, ...props }) => (
   <button className={`px-4 py-2 rounded ${className}`} {...props}>
@@ -7,11 +21,11 @@ const Button = ({ children, className, ...props }) => (
   </button>
 );
 
-const Link = ({ href, children, className }) => (
-  <a href={href} className={className}>
-    {children}
-  </a>
-);
+// const Link = ({ href, children, className }) => (
+//   <Link to={href} className={className}>
+//     {children}
+//   </Link>
+// );
 
 const FeatureCard = ({ icon, title, description }) => (
   <div className="bg-[#282828] p-6 rounded-lg text-center">
@@ -44,47 +58,75 @@ const FeaturesPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-[#282828]">
-        <Link href="/" className="flex items-center space-x-2">
+        <Link to={"/"} className="flex items-center space-x-2">
           <Youtube className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
           <span className="text-lg sm:text-xl font-bold">Subspot</span>
         </Link>
         <nav className="hidden md:flex space-x-4">
-          <Link href="/" className="hover:text-gray-300">Home</Link>
-          <Link href="/features" className="hover:text-gray-300">Features</Link>
-          <Link href="/pricing" className="hover:text-gray-300">Pricing</Link>
-          <Link href="/faq" className="hover:text-gray-300">FAQ</Link>
+          <Link to={"/"} className="hover:text-gray-300">
+            Home
+          </Link>
+          <Link to={"/features"} className="hover:text-gray-300">
+            Features
+          </Link>
+          <Link to={"/pricing"} className="hover:text-gray-300">
+            Pricing
+          </Link>
+          <Link to={"/faq"} className="hover:text-gray-300">
+            FAQ
+          </Link>
         </nav>
         <div className="md:hidden">
-          <Button className="bg-transparent" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <Button
+            className="bg-transparent"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <Menu className="h-6 w-6" />
           </Button>
         </div>
-        <Button className="hidden md:block bg-red-600 hover:bg-red-700">Sign Up</Button>
+        <Button className="hidden md:block bg-red-600 hover:bg-red-700">
+          Sign Up
+        </Button>
       </header>
 
       {isMenuOpen && (
         <div className="md:hidden bg-[#282828] p-4">
           <nav className="flex flex-col space-y-2">
-            <Link href="/" className="hover:text-gray-300">Home</Link>
-            <Link href="/features" className="hover:text-gray-300">Features</Link>
-            <Link href="/pricing" className="hover:text-gray-300">Pricing</Link>
-            <Link href="/faq" className="hover:text-gray-300">FAQ</Link>
-            <Button className="bg-red-600 hover:bg-red-700 w-full">Sign Up</Button>
+            <Link to={"/"} className="hover:text-gray-300">
+              Home
+            </Link>
+            <Link to={"/features"} className="hover:text-gray-300">
+              Features
+            </Link>
+            <Link to={"/pricing"} className="hover:text-gray-300">
+              Pricing
+            </Link>
+            <Link to={"/faq"} className="hover:text-gray-300">
+              FAQ
+            </Link>
+            <Button className="bg-red-600 hover:bg-red-700 w-full">
+              Sign Up
+            </Button>
           </nav>
         </div>
       )}
 
       <main className="flex-grow">
         <section className="py-12 sm:py-20 px-4 text-center bg-gradient-to-b from-[#282828] to-black">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Subspot Features</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            Subspot Features
+          </h1>
           <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
-            Discover how Subspot simplifies your YouTube Premium experience with our innovative features.
+            Discover how Subspot simplifies your YouTube Premium experience with
+            our innovative features.
           </p>
         </section>
 
         <section className="py-12 sm:py-20 px-4 bg-[#181818]">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">Core Features</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">
+              Core Features
+            </h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <FeatureCard
                 icon={<Users className="h-12 w-12 text-red-600" />}
@@ -122,7 +164,9 @@ const FeaturesPage = () => {
 
         <section className="py-12 sm:py-20 px-4 bg-black">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">YouTube Premium Benefits</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">
+              YouTube Premium Benefits
+            </h2>
             <div className="grid gap-8 md:grid-cols-2">
               <PremiumFeature
                 icon={<Play className="h-8 w-8 text-red-600" />}
@@ -149,9 +193,12 @@ const FeaturesPage = () => {
         </section>
 
         <section className="py-12 sm:py-20 px-4 bg-[#181818] text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6">Ready to Experience Subspot?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+            Ready to Experience Subspot?
+          </h2>
           <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
-            Join Subspot today and start enjoying all these features and benefits of YouTube Premium without any hassle.
+            Join Subspot today and start enjoying all these features and
+            benefits of YouTube Premium without any hassle.
           </p>
           <Button className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8">
             Sign Up Now
@@ -160,7 +207,9 @@ const FeaturesPage = () => {
 
         <section className="py-12 sm:py-20 px-4 bg-black">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">
+              Frequently Asked Questions
+            </h2>
             <div className="space-y-6">
               <FAQItem
                 question="How long does it take to be added to a family group?"
@@ -191,6 +240,3 @@ const FeaturesPage = () => {
 };
 
 export default FeaturesPage;
-
-
-

@@ -11,7 +11,7 @@ import {
   Clock,
   Menu,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const FeatureCard = ({ icon, title, description }) => (
@@ -73,15 +73,15 @@ export default function LandingPage() {
       {isMenuOpen && (
         <div className="md:hidden bg-[#282828] p-4">
           <nav className="flex flex-col space-y-2">
-            <a href="#features" className="hover:text-gray-300">
+            <Link to={"/features"} className="hover:text-gray-300">
               Features
-            </a>
-            <a href="#pricing" className="hover:text-gray-300">
+            </Link>
+            <Link to={"/pricing"} className="hover:text-gray-300">
               Pricing
-            </a>
-            <a href="#security" className="hover:text-gray-300">
+            </Link>
+            <Link to={"/security"} className="hover:text-gray-300">
               Security
-            </a>
+            </Link>
             <Button className="bg-red-600 hover:bg-red-700 w-full">
               Sign Up
             </Button>
