@@ -12,6 +12,8 @@ import FeaturesPage from "./OurComponents/Features/FeaturesPage.jsx";
 import PricingPage from "./OurComponents/Pricing/Pricing.jsx";
 import FAQ from "./OurComponents/FAQ/FAQ.jsx";
 import ContactUs from "./OurComponents/Contact/ContactUs.jsx";
+import AboutUs from "./OurComponents/Aboutus/AboutUs.jsx";
+import TermAndConditions from "./OurComponents/Term and Conditions/TermAndConditions.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
       {
         path: "/SubscribingPage",
         element: <SubscribingPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/terms&Conditions",
+        element: <TermAndConditions />,
       },
     ],
   },
