@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PaymentProcess from "./OurComponents/Payments/PaymentProcess.jsx";
 import Dashboard from "./OurComponents/Dashboard/Dashboard.jsx";
 import SubscriptionSelection from "./OurComponents/Subscribtion Selection/SubscriptionSelection.jsx";
-import SubscribingPage from "./OurComponents/Subscribtion Selection/SubscribingPage.jsx";
 import LandingPage from "./OurComponents/LandingPage/LandingPage.jsx";
 import FeaturesPage from "./OurComponents/Features/FeaturesPage.jsx";
 import PricingPage from "./OurComponents/Pricing/Pricing.jsx";
@@ -53,10 +52,6 @@ const router = createBrowserRouter([
       {
         path: "/PaymentProcess",
         element: <PaymentProcess />,
-      },
-      {
-        path: "/SubscribingPage",
-        element: <SubscribingPage />,
       },
       {
         path: "/about",
