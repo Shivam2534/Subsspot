@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PaymentProcess from "./OurComponents/Payments/PaymentProcess.jsx";
-import Dashboard from "./OurComponents/Dashboard/Dashboard.jsx";
+import Dashboard from "./OurComponents/Dashboards/Dashboard.jsx";
 import SubscriptionSelection from "./OurComponents/Subscribtion Selection/SubscriptionSelection.jsx";
 import LandingPage from "./OurComponents/LandingPage/LandingPage.jsx";
 import FeaturesPage from "./OurComponents/Features/FeaturesPage.jsx";
@@ -15,6 +15,7 @@ import AboutUs from "./OurComponents/Aboutus/AboutUs.jsx";
 import TermAndConditions from "./OurComponents/Term and Conditions/TermAndConditions.jsx";
 import PrivecyPolicy from "./OurComponents/Privecy policy/PrivecyPolicy.jsx";
 import Cancelation_policy from "./OurComponents/Cancellation policy/Cancelation_policy.jsx";
+import UserDashboard from "./OurComponents/Dashboards/User Dashboard/UserDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/Cancelation_policy",
         element: <Cancelation_policy />,
+      },
+      {
+        path: "/userdashboard",
+        element: <UserDashboard />,
       },
     ],
   },
