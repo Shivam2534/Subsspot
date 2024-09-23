@@ -23,13 +23,78 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SubscriptionProcessPage = ({ onBack }) => {
   const [step, setStep] = useState(1);
-  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+  // const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
+
+  const [amount, setAmount] = useState(60);
+
+  const handleCreateOrder = async () => {
+    try {
+      console.log("Request is here");
+      const {
+        data: { key },
+      } = await axios.get("http://localhost:3000/api/v1/key/apikey");
+
+      const res = await axios.post("http://localhost:3000/api/v1/createorder", {
+        amount: Number(amount),
+      });
+      const order = res.data.order;
+      console.log("order-", order);
+
+      const options = {
+        key: key,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Shivam Kanchole",
+        description: "Test Transaction by Shivam",
+        image: "https://example.com/your-logo.png",
+        order_id: order.id,
+        handler: function (response) {
+          handlePaymentVerification(response);
+        },
+        prefill: {
+          name: "Shivam Kanchole",
+          email: "shivamkanchole2002@gmail.com",
+          contact: "6262556682",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.error("Error creating order:", error);
+      // alert("Failed to create order. Please try again.");
+    }
+  };
+
+  async function handlePaymentVerification(response) {
+    try {
+      const verificationResponse = await axios.post(
+        "http://localhost:3000/api/v1/verifyPayment",
+        response
+      );
+      if (verificationResponse.data.success) {
+        navigate(verificationResponse.data.redirectURL);
+      } else {
+        alert("Payment verification failed. Please contact support.");
+      }
+    } catch (error) {
+      console.error("Error verifying payment:", error);
+      alert("Payment verification failed. Please contact support.");
+    }
+  }
 
   const handleNext = () => {
     if (step === 3 && (!email || email !== confirmEmail || !termsAccepted)) {
@@ -49,11 +114,9 @@ const SubscriptionProcessPage = ({ onBack }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically handle the form submission,
-    // including payment processing and API calls
-    console.log("Form submitted");
-    // For demo purposes, we'll just move to a "success" step
-    setStep(5);
+
+    handleCreateOrder();
+    // setStep(5);
   };
 
   const navigate = useNavigate();
@@ -285,7 +348,7 @@ const SubscriptionProcessPage = ({ onBack }) => {
               </div>
             )}
 
-            {step === 4 && (
+            {/* {step === 4 && (
               <form onSubmit={handleSubmit}>
                 <h3 className="text-lg font-semibold mb-4">Payment Details</h3>
                 <div className="space-y-4">
@@ -335,7 +398,14 @@ const SubscriptionProcessPage = ({ onBack }) => {
                   )}
                 </div>
               </form>
-            )}
+            )} */}
+            {/* {
+              step===4 && (
+                <div>
+                  
+                </div>
+              )
+            } */}
 
             {step === 5 && (
               <div className="text-center">

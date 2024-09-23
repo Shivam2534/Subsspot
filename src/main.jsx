@@ -16,6 +16,7 @@ import TermAndConditions from "./OurComponents/Term and Conditions/TermAndCondit
 import PrivecyPolicy from "./OurComponents/Privecy policy/PrivecyPolicy.jsx";
 import Cancelation_policy from "./OurComponents/Cancellation policy/Cancelation_policy.jsx";
 import UserDashboard from "./OurComponents/Dashboards/User Dashboard/UserDashboard.jsx";
+import PaymentSuccess from "./OurComponents/Payment Integration/PaymentSuccess.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <ContactUs/>,
+        element: <ContactUs />,
       },
       {
         path: "/dashboard",
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/userdashboard",
         element: <UserDashboard />,
+      },
+      {
+        path: "/paymentSuccess",
+        element: <PaymentSuccess />,
       },
     ],
   },
