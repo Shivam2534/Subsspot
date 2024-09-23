@@ -19,11 +19,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { DeployedBackendURL } from "../../../Constant.js";
 
 const SubscriptionProcessPage = ({ onBack }) => {
   const [step, setStep] = useState(1);
@@ -39,9 +41,9 @@ const SubscriptionProcessPage = ({ onBack }) => {
       console.log("Request is here");
       const {
         data: { key },
-      } = await axios.get("http://localhost:3000/api/v1/key/apikey");
+      } = await axios.get(`${DeployedBackendURL}/api/v1/key/apikey`);
 
-      const res = await axios.post("http://localhost:3000/api/v1/createorder", {
+      const res = await axios.post(`${DeployedBackendURL}/api/v1/createorder`, {
         amount: Number(amount),
       });
       const order = res.data.order;
@@ -82,7 +84,7 @@ const SubscriptionProcessPage = ({ onBack }) => {
   async function handlePaymentVerification(response) {
     try {
       const verificationResponse = await axios.post(
-        "http://localhost:3000/api/v1/verifyPayment",
+        `${DeployedBackendURL}/api/v1/verifyPayment`,
         response
       );
       if (verificationResponse.data.success) {
