@@ -1,23 +1,23 @@
 import React from 'react'
 import { Youtube, Menu } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 
-export default function Component() {
+export default function PrivecyPolicy() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-[#282828]">
-        <Link href="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <Youtube className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
           <span className="text-lg sm:text-xl font-bold">Subspot</span>
         </Link>
         <nav className="hidden md:flex space-x-4">
-          <Link href="/" className="hover:text-gray-300">Home</Link>
-          <Link href="/features" className="hover:text-gray-300">Features</Link>
-          <Link href="/pricing" className="hover:text-gray-300">Pricing</Link>
-          <Link href="/about" className="hover:text-gray-300">About Us</Link>
-          <Link href="/faq" className="hover:text-gray-300">FAQ</Link>
+          <Link to="/" className="hover:text-gray-300">Home</Link>
+          <Link to="/features" className="hover:text-gray-300">Features</Link>
+          <Link to="/pricing" className="hover:text-gray-300">Pricing</Link>
+          <Link to="/about" className="hover:text-gray-300">About Us</Link>
+          <Link to="/faq" className="hover:text-gray-300">FAQ</Link>
         </nav>
         <div className="md:hidden">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white">
@@ -30,11 +30,11 @@ export default function Component() {
       {isMenuOpen && (
         <div className="md:hidden bg-[#282828] p-4">
           <nav className="flex flex-col space-y-2">
-            <Link href="/" className="hover:text-gray-300">Home</Link>
-            <Link href="/features" className="hover:text-gray-300">Features</Link>
-            <Link href="/pricing" className="hover:text-gray-300">Pricing</Link>
-            <Link href="/about" className="hover:text-gray-300">About Us</Link>
-            <Link href="/faq" className="hover:text-gray-300">FAQ</Link>
+            <Link to="/" className="hover:text-gray-300">Home</Link>
+            <Link to="/features" className="hover:text-gray-300">Features</Link>
+            <Link to="/pricing" className="hover:text-gray-300">Pricing</Link>
+            <Link to="/about" className="hover:text-gray-300">About Us</Link>
+            <Link to="/faq" className="hover:text-gray-300">FAQ</Link>
             <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded w-full">Sign Up</button>
           </nav>
         </div>

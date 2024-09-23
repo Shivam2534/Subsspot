@@ -8,27 +8,31 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const userName = "John Doe"; // This would typically come from a user context or prop
   const navigate = useNavigate();
+  function NavigateToSelectSubscribtion(){
+    navigate('/SubscriptionSelection')
+  }
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-black">
-        <a href="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <Youtube className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
           <span className="text-lg sm:text-xl font-bold">Subspot</span>
-        </a>
+        </Link>
         <nav className="hidden md:flex space-x-6">
-          <a href="#features" className="text-gray-300 hover:text-white">
+          <Link to="/features" className="text-gray-300 hover:text-white">
             Features
-          </a>
-          <a href="#pricing" className="text-gray-300 hover:text-white">
+          </Link>
+          <Link to="/pricing" className="text-gray-300 hover:text-white">
             Pricing
-          </a>
-          <a href="#faq" className="text-gray-300 hover:text-white">
+          </Link>
+          <Link to="/faq" className="text-gray-300 hover:text-white">
             FAQ
-          </a>
+          </Link>
         </nav>
         <div className="flex items-center space-x-4">
           <Button className="bg-red-600 hover:bg-red-700 text-white">
@@ -87,7 +91,7 @@ export default function Dashboard() {
                 </li>
               </ul>
               <Button
-                onclick={navigate("/SubscriptionSelection")}
+                onClick={NavigateToSelectSubscribtion}
                 className="w-full bg-red-600 hover:bg-red-700 text-lg py-6 text-white"
               >
                 Activate Subscription

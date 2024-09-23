@@ -14,6 +14,8 @@ import FAQ from "./OurComponents/FAQ/FAQ.jsx";
 import ContactUs from "./OurComponents/Contact/ContactUs.jsx";
 import AboutUs from "./OurComponents/Aboutus/AboutUs.jsx";
 import TermAndConditions from "./OurComponents/Term and Conditions/TermAndConditions.jsx";
+import PrivecyPolicy from "./OurComponents/Privecy policy/PrivecyPolicy.jsx";
+import Cancelation_policy from "./OurComponents/Cancellation policy/Cancelation_policy.jsx";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: "/terms&Conditions",
         element: <TermAndConditions />,
+      },
+      {
+        path: "/PrivecyPolicy",
+        element: <PrivecyPolicy />,
+      },
+      {
+        path: "/Cancelation_policy",
+        element: <Cancelation_policy />,
       },
     ],
   },

@@ -27,7 +27,7 @@ export default function Footer() {
                   About Us
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to={"/careers"}
                   className="text-gray-400 hover:text-white transition-colors"
@@ -42,15 +42,15 @@ export default function Footer() {
                 >
                   Press
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link
                   to={"/blog"}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Blog
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div>
@@ -58,7 +58,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to={"/help"}
+                  to={"/contact"}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Help Center
@@ -80,14 +80,14 @@ export default function Footer() {
                   FAQ
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to={"/community"}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Community
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div>
@@ -103,23 +103,23 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to={"/privacy"}
+                  to={"/PrivecyPolicy"}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Privacy Policy
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to={"/cookies"}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Cookie Policy
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
-                  to={"/cancellation"}
+                  to={"/Cancelation_policy"}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Cancellation Policy
