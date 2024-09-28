@@ -16,7 +16,8 @@ import TermAndConditions from "./OurComponents/Term and Conditions/TermAndCondit
 import PrivecyPolicy from "./OurComponents/Privecy policy/PrivecyPolicy.jsx";
 import Cancelation_policy from "./OurComponents/Cancellation policy/Cancelation_policy.jsx";
 import UserDashboard from "./OurComponents/Dashboards/User Dashboard/UserDashboard.jsx";
-import PaymentSuccess from "./OurComponents/Payment Integration/PaymentSuccess.jsx";
+import GroupSelection from "./OurComponents/GroupSelection/GroupSelection.jsx";
+import EmailConfirmation from "./OurComponents/EmailConfirmation/EmailComfirmation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,16 +42,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <ContactUs />,
+        element: <ContactUs/>,
       },
       {
         path: "/dashboard",
         element: <Dashboard />,
       },
-      {
-        path: "/SubscriptionSelection",
-        element: <SubscriptionSelection />,
-      },
+      
       {
         path: "/PaymentProcess",
         element: <PaymentProcess />,
@@ -76,8 +74,18 @@ const router = createBrowserRouter([
         element: <UserDashboard />,
       },
       {
-        path: "/paymentSuccess",
-        element: <PaymentSuccess />,
+        path: "/SubscriptionSelection",
+        element: <SubscriptionSelection />,
+      },
+      
+      
+      {
+        path: "/GroupSelection",
+        element: <GroupSelection/>,
+      },
+      {
+        path: "/EmailConfirmation",
+        element: <EmailConfirmation/>,
       },
     ],
   },
