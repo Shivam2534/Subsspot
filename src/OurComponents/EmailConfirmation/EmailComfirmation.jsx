@@ -11,7 +11,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import axios from "axios";
-import { DeployedBackendURL } from "../../../Constant.js";
+import { DeployedBackendURL } from "./Constant.js";
+
 
 export default function EmailConfirmation() {
   const [email, setEmail] = useState("");
@@ -33,14 +34,18 @@ export default function EmailConfirmation() {
   const handleCreateOrder = async () => {
     try {
       console.log("Request is here");
+
       const {
         data: { key },
       } = await axios.get(`${DeployedBackendURL}/api/v1/key/apikey`);
 
       console.log(key);
-      const res = await axios.post(`${DeployedBackendURL}/api/v1/createorder`, {
-        amount: Number(amount),
-      });
+      const res = await axios.post(
+        `${DeployedBackendURL}/api/v1/pay/createorder`,
+        {
+          amount: Number(amount),
+        }
+      );
       const order = res.data.order;
       console.log("order-", order);
 
@@ -79,7 +84,7 @@ export default function EmailConfirmation() {
   async function handlePaymentVerification(response) {
     try {
       const verificationResponse = await axios.post(
-        `${DeployedBackendURL}/api/v1/verifyPayment`,
+        `${DeployedBackendURL}/api/v1/pay/verifyPayment`,
         response
       );
       if (verificationResponse.data.success) {
