@@ -1,4 +1,4 @@
-import { Youtube, Check, ArrowRight, Menu } from "lucide-react";
+import { Youtube, Check, ArrowRight, Menu, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,13 +9,18 @@ import {
 } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Dashboard() {
+  const UserData = useSelector((state)=> state.auth.UserData)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const userName = "John Doe"; // This would typically come from a user context or prop
   const navigate = useNavigate();
-  function NavigateToSelectSubscribtion(){
-    navigate('/SubscriptionSelection')
+  function NavigateToSelectSubscribtion() {
+    navigate("/SubscriptionSelection");
   }
+
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-black">
@@ -35,9 +40,30 @@ export default function Dashboard() {
           </Link>
         </nav>
         <div className="flex items-center space-x-4">
-          <Button className="bg-red-600 hover:bg-red-700 text-white">
-            Sign Out
-          </Button>
+          <div className="relative">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="w-10 h-10 rounded-full bg-[#282828] flex items-center justify-center transition-transform hover:scale-110"
+            >
+              <User className="h-6 w-6 text-white" />
+            </button>
+            {isMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+                <a
+                  href="/profile"
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                >
+                  Profile
+                </a>
+                <a
+                  href="/logout"
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                >
+                  Logout
+                </a>
+              </div>
+            )}
+          </div>
           <Button variant="ghost" className="md:hidden">
             <Menu className="h-6 w-6" />
           </Button>
@@ -48,7 +74,7 @@ export default function Dashboard() {
         <div className="max-w-4xl mx-auto space-y-12">
           <section className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold text-white">
-              Welcome, {userName}!
+              Welcome, {UserData.username}!
             </h1>
             <p className="text-xl text-gray-400">
               Ready to enjoy YouTube Premium at a fraction of the cost?

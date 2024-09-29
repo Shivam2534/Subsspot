@@ -10,9 +10,11 @@ import {
   Users,
   Clock,
   Menu,
+  User,
 } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const FeatureCard = ({ icon, title, description }) => (
   <div className="bg-[#282828] p-4 sm:p-6 rounded-lg text-center">
@@ -30,6 +32,7 @@ const SecurityFeature = ({ title, description }) => (
 );
 
 export default function LandingPage() {
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -38,6 +41,16 @@ export default function LandingPage() {
   function NavigateUser() {
     navigate("/dashboard");
   }
+
+  const HandleSignUp = () => {
+    navigate("/signup");
+  };
+
+  const logoutUser = () => {
+    localStorage.removeItem("UserData");
+    window.location.reload();
+    navigate("/");
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
@@ -65,9 +78,39 @@ export default function LandingPage() {
             <Menu className="h-6 w-6" />
           </Button>
         </div>
-        <Button className="hidden md:block bg-red-600 hover:bg-red-700">
-          Sign Up
-        </Button>
+        {!isUserLoggedIn ? (
+          <Button
+            onClick={HandleSignUp}
+            className="hidden md:block bg-red-600 hover:bg-red-700"
+          >
+            Sign Up
+          </Button>
+        ) : (
+          <div className="relative">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="w-10 h-10 rounded-full bg-[#282828] flex items-center justify-center transition-transform hover:scale-110"
+            >
+              <User className="h-6 w-6 text-white" />
+            </button>
+            {isMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+                <Link
+                  to={"/userdashboard"}
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={logoutUser}
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </header>
 
       {isMenuOpen && (

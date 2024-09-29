@@ -1,8 +1,12 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { useLocation, useNavigate } from "react-router-dom";
+import { CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 export default function PaymentSuccess() {
   const location = useLocation();
@@ -13,7 +17,8 @@ export default function PaymentSuccess() {
   const date = new Date().toLocaleString();
 
   const handleRedirectToDashboard = () => {
-    navigate('/userdashboard');
+    navigate("/userdashboard");
+    window.location.reload(); 
   };
 
   return (
@@ -28,18 +33,26 @@ export default function PaymentSuccess() {
           </h2>
         </CardHeader>
         <CardContent className="text-center">
-          <p className="mb-4">Thank you for your payment. Your transaction was successful.</p>
+          <p className="mb-4">
+            Thank you for your payment. Your transaction was successful.
+          </p>
           <ul className="space-y-2 text-left">
-            <li><strong>Reference Number:</strong> {referenceNo}</li>
-            <li><strong>Amount Paid:</strong> ${amount}</li>
-            <li><strong>Date:</strong> {date}</li>
-            <li><strong>Status:</strong> Completed</li>
+            <li>
+              <strong>Reference Number:</strong> {referenceNo}
+            </li>
+            <li>
+              <strong>Amount Paid:</strong> ${amount}
+            </li>
+            <li>
+              <strong>Date:</strong> {date}
+            </li>
+            <li>
+              <strong>Status:</strong> Completed
+            </li>
           </ul>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Button onClick={handleRedirectToDashboard}>
-            Go to Dashboard
-          </Button>
+          <Button onClick={handleRedirectToDashboard}>Go to Dashboard</Button>
         </CardFooter>
       </Card>
     </div>

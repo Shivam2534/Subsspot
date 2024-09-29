@@ -18,7 +18,11 @@ import Cancelation_policy from "./OurComponents/Cancellation policy/Cancelation_
 import UserDashboard from "./OurComponents/Dashboards/User Dashboard/UserDashboard.jsx";
 import GroupSelection from "./OurComponents/GroupSelection/GroupSelection.jsx";
 import EmailConfirmation from "./OurComponents/EmailConfirmation/EmailComfirmation.jsx";
-
+import PaymentSuccess from "./OurComponents/Payment Integration/PaymentSuccess.jsx";
+import Signup from "./OurComponents/Authentication/UserRegistration.jsx";
+import Login from "./OurComponents/Authentication/Login.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/features",
@@ -42,13 +54,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <ContactUs/>,
+        element: <ContactUs />,
       },
       {
         path: "/dashboard",
         element: <Dashboard />,
       },
-      
+
       {
         path: "/PaymentProcess",
         element: <PaymentProcess />,
@@ -77,15 +89,17 @@ const router = createBrowserRouter([
         path: "/SubscriptionSelection",
         element: <SubscriptionSelection />,
       },
-      
-      
       {
         path: "/GroupSelection",
-        element: <GroupSelection/>,
+        element: <GroupSelection />,
       },
       {
         path: "/EmailConfirmation",
-        element: <EmailConfirmation/>,
+        element: <EmailConfirmation />,
+      },
+      {
+        path: "/paymentSuccess",
+        element: <PaymentSuccess />,
       },
     ],
   },
@@ -93,8 +107,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </Provider>
   </StrictMode>
 );

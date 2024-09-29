@@ -12,9 +12,10 @@ import { useNavigate } from "react-router-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import axios from "axios";
 import { DeployedBackendURL } from "./Constant.js";
-
+import { useSelector } from "react-redux";
 
 export default function EmailConfirmation() {
+  const UserData = useSelector((state) => state.auth.UserData);
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -39,7 +40,6 @@ export default function EmailConfirmation() {
         data: { key },
       } = await axios.get(`${DeployedBackendURL}/api/v1/key/apikey`);
 
-      console.log(key);
       const res = await axios.post(
         `${DeployedBackendURL}/api/v1/pay/createorder`,
         {
@@ -53,7 +53,7 @@ export default function EmailConfirmation() {
         key: key,
         amount: order.amount,
         currency: order.currency,
-        name: "Shivam Kanchole",
+        name: UserData.username,
         description: "Test Transaction by Shivam",
         image: "https://example.com/your-logo.png",
         order_id: order.id,
@@ -61,8 +61,8 @@ export default function EmailConfirmation() {
           handlePaymentVerification(response);
         },
         prefill: {
-          name: "Shivam Kanchole",
-          email: "shivamkanchole2002@gmail.com",
+          name: UserData.username,
+          email: confirmEmail,
           contact: "6262556682",
         },
         notes: {
@@ -83,12 +83,25 @@ export default function EmailConfirmation() {
 
   async function handlePaymentVerification(response) {
     try {
+      response = {
+        ...response,
+        userId: UserData._id,
+        subscribingEmail: confirmEmail,
+        amount: amount,
+      };
+
       const verificationResponse = await axios.post(
         `${DeployedBackendURL}/api/v1/pay/verifyPayment`,
         response
       );
+
+      // console.log("verificationResponse-", verificationResponse.data.data);
       if (verificationResponse.data.success) {
         navigate(verificationResponse.data.redirectURL);
+        localStorage.setItem(
+          "UserData",
+          JSON.stringify(verificationResponse.data.data)
+        );
       } else {
         alert("Payment verification failed. Please contact support.");
       }
