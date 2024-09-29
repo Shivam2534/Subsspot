@@ -125,7 +125,10 @@ export default function LandingPage() {
             <Link to={"/security"} className="hover:text-gray-300">
               Security
             </Link>
-            <Button className="bg-red-600 hover:bg-red-700 w-full">
+            <Button
+              onClick={HandleSignUp}
+              className="bg-red-600 hover:bg-red-700 w-full"
+            >
               Sign Up
             </Button>
           </nav>
