@@ -49,7 +49,7 @@ export default function PlanInfo() {
               <div className="rounded-full bg-red-600 p-2">
                 <Check className="h-5 w-5 text-white" />
               </div>
-              <span className="ml-2 text-red-600 font-semibold">1 Plan</span>
+              <span className="ml-2 text-red-600 font-semibold">Plan</span>
             </div>
             <div className="h-px bg-zinc-700 flex-grow mx-4"></div>
             <div className="flex items-center">
