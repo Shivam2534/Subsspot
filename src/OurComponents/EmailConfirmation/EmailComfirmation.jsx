@@ -102,6 +102,8 @@ export default function EmailConfirmation() {
           "UserData",
           JSON.stringify(verificationResponse.data.data)
         );
+
+        window.location.reload();
       } else {
         alert("Payment verification failed. Please contact support.");
       }

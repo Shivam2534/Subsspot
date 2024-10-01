@@ -22,6 +22,7 @@ import { Progress } from "@/components/ui/progress";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ShareButtons from "./ShareButtons";
 
 export default function UserDashboard() {
   const UserData = useSelector((state) => state.auth.UserData);
@@ -315,8 +316,9 @@ export default function UserDashboard() {
                 <p className="mb-4">
                   Invite friends and both get one month free!
                 </p>
-                <Button className="w-full bg-pink-600 hover:bg-pink-700">
-                  Send Invites
+                <Button className="w-full p-0 flex justify-start bg-[#282828] hover:bg-[#282828]">
+                  {/* Send Invites */}
+                  <ShareButtons />
                 </Button>
               </CardContent>
             </Card>

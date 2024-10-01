@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { Youtube, Menu, Search, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Youtube,
+  Menu,
+  Search,
+  ChevronDown,
+  ChevronUp,
+  User,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function FAQ() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedQuestion, setExpandedQuestion] = useState(null);
-
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
   const faqs = [
     {
       question: "How does Subspot work?",
@@ -62,6 +70,12 @@ export default function FAQ() {
         "Currently, Subspot is only available for users in India. We're working on expanding our service to other countries in the future.",
     },
   ];
+
+  const navigate = useNavigate();
+
+  const GotoContactPage = () => {
+    navigate("/contact");
+  };
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-[#282828]">
@@ -92,9 +106,15 @@ export default function FAQ() {
             <Menu className="h-6 w-6" />
           </Button>
         </div>
-        <Button className="hidden md:block bg-red-600 hover:bg-red-700">
-          Sign Up
-        </Button>
+        {!isUserLoggedIn ? (
+          <Button className="hidden md:block bg-red-600 hover:bg-red-700">
+            Sign Up
+          </Button>
+        ) : (
+          <div className="rounded-full bg-slate-800 p-1">
+            <User className=" size-7 " />
+          </div>
+        )}
       </header>
 
       {isMenuOpen && (
@@ -112,9 +132,16 @@ export default function FAQ() {
             <Link to={"#"} className="hover:text-gray-300">
               FAQ
             </Link>
-            <Button className="bg-red-600 hover:bg-red-700 w-full">
-              Sign Up
-            </Button>
+
+            {!isUserLoggedIn ? (
+              <Button className="bg-red-600 hover:bg-red-700 w-full">
+                Sign Up
+              </Button>
+            ) : (
+              <div className="rounded-full bg-slate-800 p-1">
+                <User className=" size-7 " />
+              </div>
+            )}
           </nav>
         </div>
       )}
@@ -181,7 +208,10 @@ export default function FAQ() {
             Our support team is here to help. Contact us anytime and we'll get
             back to you as soon as possible.
           </p>
-          <Button className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8">
+          <Button
+            onClick={GotoContactPage}
+            className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
+          >
             Contact Support
           </Button>
         </section>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Youtube, Menu, Check, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Youtube, Menu, Check, X, User } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Placeholder for the Button component
 const Button = ({ children, variant, size, className, ...props }) => (
@@ -14,15 +15,15 @@ const Button = ({ children, variant, size, className, ...props }) => (
   </button>
 );
 
-// Placeholder for the Link component
-// const Link = ({ href, children, className }) => (
-//   <a href={href} className={className}>
-//     {children}
-//   </a>
-// );
-
 function PricingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
+  const UserData = useSelector((state) => state.auth.UserData);
+  const navigate = useNavigate();
+
+  const SubscibeSubspot = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
@@ -54,9 +55,15 @@ function PricingPage() {
             <Menu className="h-6 w-6" />
           </Button>
         </div>
-        <Button className="hidden md:block bg-red-600 hover:bg-red-700">
-          Sign Up
-        </Button>
+        {isUserLoggedIn ? (
+          <div className="rounded-full bg-slate-800 p-1">
+            <User className=" size-7 " />
+          </div>
+        ) : (
+          <Button className="hidden rounded-md md:block bg-red-600 hover:bg-red-700">
+            Sign Up
+          </Button>
+        )}
       </header>
 
       {isMenuOpen && (
@@ -187,9 +194,20 @@ function PricingPage() {
             Join Subspot today and start enjoying all the benefits of YouTube
             Premium at a fraction of the cost.
           </p>
-          <Button className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8">
-            Sign Up Now
-          </Button>
+          {isUserLoggedIn ? (
+            UserData.isSubscribed && (
+              <Button
+                onClick={SubscibeSubspot}
+                className="bg-red-600 rounded-md hover:bg-red-700 text-lg py-4 px-6 sm:py-4 sm:px-8"
+              >
+                Subscribe Now
+              </Button>
+            )
+          ) : (
+            <Button className="bg-red-600 rounded-md hover:bg-red-700 text-lg py-4 px-6 sm:py-4 sm:px-8">
+              Sign In Now
+            </Button>
+          )}
         </section>
       </main>
 

@@ -33,12 +33,20 @@ const SecurityFeature = ({ title, description }) => (
 
 export default function LandingPage() {
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
+  const UserData = useSelector((state) => state.auth.UserData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
   const navigate = useNavigate();
+
   function NavigateUser() {
+    if (isUserLoggedIn) {
+      navigate("/dashboard");
+    } else {
+      navigate("/signup");
+    }
+  }
+  function NavigateUserToSubscribtionPage() {
     navigate("/dashboard");
   }
 
@@ -52,13 +60,17 @@ export default function LandingPage() {
     navigate("/");
   };
 
+  const GotoFeatures = () => {
+    navigate("/features");
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-[#282828]">
-        <div className="flex items-center space-x-2">
+        <Link to={'/'}  className="flex items-center space-x-2 cursor-pointer">
           <Youtube className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
           <span className="text-lg sm:text-xl font-bold">Subspot</span>
-        </div>
+        </Link>
         <nav className="hidden md:flex space-x-4">
           <NavLink to={"/features"} className="hover:text-gray-300">
             Features
@@ -94,16 +106,22 @@ export default function LandingPage() {
               <User className="h-6 w-6 text-white" />
             </button>
             {isMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
-                <Link
-                  to={"/userdashboard"}
-                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
-                >
-                  Profile
-                </Link>
+              <div
+                className={`${
+                  isMenuOpen ? "absolute" : ""
+                } right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5`}
+              >
+                {UserData?.isSubscribed && (
+                  <Link
+                    to={"/userdashboard"}
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                  >
+                    Profile
+                  </Link>
+                )}
                 <button
                   onClick={logoutUser}
-                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                  className="w-full flex px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
                 >
                   Logout
                 </button>
@@ -125,12 +143,21 @@ export default function LandingPage() {
             <Link to={"/security"} className="hover:text-gray-300">
               Security
             </Link>
-            <Button
-              onClick={HandleSignUp}
-              className="bg-red-600 hover:bg-red-700 w-full"
-            >
-              Sign Up
-            </Button>
+            {isUserLoggedIn ? (
+              <Button
+                onClick={logoutUser}
+                className="bg-red-600 hover:bg-red-700 w-full"
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                onClick={HandleSignUp}
+                className="bg-red-600 hover:bg-red-700 w-full"
+              >
+                Sign Up
+              </Button>
+            )}
           </nav>
         </div>
       )}
@@ -145,12 +172,30 @@ export default function LandingPage() {
             groups for you, manage subscriptions, and ensure you always have
             access to premium features.
           </p>
-          <Button
-            onClick={NavigateUser}
-            className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
-          >
-            Get Started Now
-          </Button>
+          {isUserLoggedIn ? (
+            UserData.isSubscribed ? (
+              <a
+                href="https://www.youtube.com/"
+                className="bg-red-600 hover:bg-red-700 text-lg rounded-md py-4 px-6 sm:py-3 sm:px-8"
+              >
+                Enjoy Youtube
+              </a>
+            ) : (
+              <Button
+                onClick={NavigateUserToSubscribtionPage}
+                className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
+              >
+                Get Started Now
+              </Button>
+            )
+          ) : (
+            <Button
+              onClick={NavigateUser}
+              className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
+            >
+              Get Started Now
+            </Button>
+          )}
         </section>
 
         <section id="features" className="py-12 sm:py-20 px-4 bg-[#181818]">
@@ -222,9 +267,21 @@ export default function LandingPage() {
                 Viewing
               </li>
             </ul>
-            <Button className="w-full bg-red-600 hover:bg-red-700">
-              Sign Up Now
-            </Button>
+            {isUserLoggedIn ? (
+              <Button
+                onClick={GotoFeatures}
+                className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
+              >
+                Features
+              </Button>
+            ) : (
+              <Button
+                onClick={HandleSignUp}
+                className="w-full bg-red-600 hover:bg-red-700"
+              >
+                Sign Up Now
+              </Button>
+            )}
           </div>
         </section>
 
@@ -256,9 +313,21 @@ export default function LandingPage() {
             Join Subspot today and start enjoying all the benefits of YouTube
             Premium without any hassle.
           </p>
-          <Button className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8">
-            Get Started Now
-          </Button>
+          {isUserLoggedIn ? (
+            <Button
+              onClick={NavigateUserToSubscribtionPage}
+              className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
+            >
+              Get Started Now
+            </Button>
+          ) : (
+            <Button
+              onClick={HandleSignUp}
+              className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8"
+            >
+              Sign Up Now
+            </Button>
+          )}
         </section>
       </main>
 

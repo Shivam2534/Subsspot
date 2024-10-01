@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 export default function Dashboard() {
   const UserData = useSelector((state) => state.auth.UserData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const Tempusername = "John Doe"; // This would typically come from a user context or prop
+  // const Tempusername = "John Doe"; // This would typically come from a user context or prop
   const navigate = useNavigate();
   function NavigateToSelectSubscribtion() {
     navigate("/SubscriptionSelection");
@@ -49,12 +49,16 @@ export default function Dashboard() {
             </button>
             {isMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
-                <a
-                  href="/profile"
-                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
-                >
-                  Profile
-                </a>
+                {UserData.isSubscribed ? (
+                  <Link
+                    to="/userdashboard"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
+                  >
+                    Profile
+                  </Link>
+                ) : (
+                  ""
+                )}
                 <a
                   href="/logout"
                   className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors"
@@ -74,8 +78,7 @@ export default function Dashboard() {
         <div className="max-w-4xl mx-auto space-y-12">
           <section className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold text-white">
-              Welcome,{" "}
-              {Tempusername}!
+              Welcome, {UserData.username}!
             </h1>
             <p className="text-xl text-gray-400">
               Ready to enjoy YouTube Premium at a fraction of the cost?

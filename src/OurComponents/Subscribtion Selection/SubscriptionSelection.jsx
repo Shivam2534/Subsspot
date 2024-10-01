@@ -137,12 +137,6 @@ export default function PlanInfo() {
           </Button>
         </div>
       </main>
-
-      <footer className="py-6 px-4 bg-black text-center border-t border-zinc-800">
-        <p className="text-sm text-gray-400">
-          &copy; 2023 Subspot. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 }

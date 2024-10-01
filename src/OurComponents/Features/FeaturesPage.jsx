@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Youtube,
   Play,
@@ -7,25 +7,20 @@ import {
   Shield,
   DollarSign,
   Users,
-  Clock,
   Menu,
   CheckCircle2,
   Zap,
   Headphones,
+  User,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Button = ({ children, className, ...props }) => (
   <button className={`px-4 py-2 rounded ${className}`} {...props}>
     {children}
   </button>
 );
-
-// const Link = ({ href, children, className }) => (
-//   <Link to={href} className={className}>
-//     {children}
-//   </Link>
-// );
 
 const FeatureCard = ({ icon, title, description }) => (
   <div className="bg-[#282828] p-6 rounded-lg text-center">
@@ -54,6 +49,13 @@ const FAQItem = ({ question, answer }) => (
 
 const FeaturesPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
+  const UserData = useSelector((state) => state.auth.UserData);
+  const navigate = useNavigate();
+
+  const GotoSubscribtionPage = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
@@ -84,9 +86,15 @@ const FeaturesPage = () => {
             <Menu className="h-6 w-6" />
           </Button>
         </div>
-        <Button className="hidden md:block bg-red-600 hover:bg-red-700">
-          Sign Up
-        </Button>
+        {isUserLoggedIn ? (
+          <div className="rounded-full bg-slate-800 p-1">
+            <User className=" size-7 " />
+          </div>
+        ) : (
+          <Button className="hidden md:block bg-red-600 hover:bg-red-700">
+            Sign Up
+          </Button>
+        )}
       </header>
 
       {isMenuOpen && (
@@ -200,9 +208,20 @@ const FeaturesPage = () => {
             Join Subspot today and start enjoying all these features and
             benefits of YouTube Premium without any hassle.
           </p>
-          <Button className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8">
-            Sign Up Now
-          </Button>
+          {isUserLoggedIn ? (
+            !UserData.isSubscribed && (
+              <Button
+                onClick={GotoSubscribtionPage}
+                className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-3 sm:px-8"
+              >
+                Subscribe
+              </Button>
+            )
+          ) : (
+            <Button className="bg-red-600 hover:bg-red-700 text-lg py-4 px-6 sm:py-6 sm:px-8">
+              Sign Up Nows
+            </Button>
+          )}
         </section>
 
         <section className="py-12 sm:py-20 px-4 bg-black">
