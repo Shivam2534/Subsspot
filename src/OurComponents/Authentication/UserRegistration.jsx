@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { DeployedBackendURL } from "../EmailConfirmation/Constant";
+import { DeployedBackendURL } from "../EmailConfirmation/Constant.js";
 import { signUpUserSchema } from "@/zodSchemaValidation/schemas.js";
 import { useNavigate } from "react-router-dom";
 
@@ -47,20 +47,24 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform validation using safeParse before making the API request
     const isValid = validateForm();
 
     if (isValid) {
-      const res = await axios.post(
-        `${DeployedBackendURL}/api/v1/user/signup`,
-        formData
-      );
-      console.log(res);
-      if (res.data.success) {
-        navigate("/login");
+      try {
+        const res = await axios.post(
+          `${DeployedBackendURL}/api/v1/user/signup`,
+          formData
+        );
+        console.log(res);
+        if (res.data.success) {
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("Error during signup:", error);
+        // Handle error (e.g., show error message to user)
       }
     } else {
-      console.log("Something is wrong in the form ");
+      console.log("Form validation failed");
     }
   };
 

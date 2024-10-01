@@ -13,9 +13,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Dashboard() {
-  const UserData = useSelector((state)=> state.auth.UserData)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const userName = "John Doe"; // This would typically come from a user context or prop
+  const UserData = useSelector((state) => state.auth.UserData);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const Tempusername = "John Doe"; // This would typically come from a user context or prop
   const navigate = useNavigate();
   function NavigateToSelectSubscribtion() {
     navigate("/SubscriptionSelection");
@@ -74,7 +74,8 @@ export default function Dashboard() {
         <div className="max-w-4xl mx-auto space-y-12">
           <section className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold text-white">
-              Welcome, {UserData.username}!
+              Welcome,{" "}
+              {Tempusername}!
             </h1>
             <p className="text-xl text-gray-400">
               Ready to enjoy YouTube Premium at a fraction of the cost?
