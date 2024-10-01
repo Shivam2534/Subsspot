@@ -25,7 +25,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
   const UserData = useSelector((state) => state.auth.UserData);
-  console.log(UserData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 

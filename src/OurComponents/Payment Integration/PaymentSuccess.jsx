@@ -13,12 +13,12 @@ export default function PaymentSuccess() {
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const referenceNo = searchParams.get("referenceNo");
-  const amount = searchParams.get("amount");
+  // const amount = searchParams.get("amount");
   const date = new Date().toLocaleString();
 
   const handleRedirectToDashboard = () => {
+    window.location.reload();
     navigate("/userdashboard");
-    window.location.reload(); 
   };
 
   return (
@@ -41,7 +41,7 @@ export default function PaymentSuccess() {
               <strong>Reference Number:</strong> {referenceNo}
             </li>
             <li>
-              <strong>Amount Paid:</strong> ${amount}
+              <strong>Amount Paid:</strong> ₹60
             </li>
             <li>
               <strong>Date:</strong> {date}
