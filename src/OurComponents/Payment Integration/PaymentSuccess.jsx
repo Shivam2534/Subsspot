@@ -17,8 +17,8 @@ export default function PaymentSuccess() {
   const date = new Date().toLocaleString();
 
   const handleRedirectToDashboard = () => {
-    window.location.reload();
     navigate("/userdashboard");
+    window.location.reload();
   };
 
   return (
